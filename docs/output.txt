@@ -1,0 +1,38 @@
+TEST1 Object Pool and PoolItem class
+TEST1 Succeed!
+TEST2 Items can be added to the object pool
+TEST2 Succeed!
+TEST3 Number of items in the pool 
+TEST3 Succeed!
+TEST4 Number of active items in the pool
+TEST4 Succeed!
+Items can be found by its name 
+TEST5 Succeed!
+TEST6 Items can be found using a reference object
+TEST6 Succeed!
+TEST7 Items can be activateds by its name 
+TEST7 Succeed!
+TEST8 Items can be deactivated by its name 
+TEST8 Succeed!
+TEST9 Calling the update method in the pool, updates all its items 
+Entity 1 updated 
+Entity 2 updated 
+Entity 3 updated 
+TEST9 Succeed!
+TEST10 Calling the draw method in the pool, draws all its items 
+Entity 1 drawed 
+Entity 2 drawed 
+Entity 3 drawed 
+TEST10 Succeed!
+TEST11 Updating only the active items in the pool 
+Entity 4 updated 
+Entity 5 updated 
+TEST11 Succeed!
+TEST12 Drawing only the active items in the pool 
+Entity 4 drawed 
+Entity 5 drawed 
+TEST12 Succeed!
+TEST13 Items can be removed from the pool by its name 
+TEST13 Succeed!
+TEST14 Removing all inactive items in the pool 
+TEST14 Succeed!
