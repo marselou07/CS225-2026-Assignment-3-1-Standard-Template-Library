@@ -33,12 +33,12 @@ using namespace testing;
 #include "object_pool.hh" 
 
 /*********************************************************************
- *                        Test for Events Callbacks                  *
+ *                        Test for Object Pooling                    *
  *********************************************************************/
 
 namespace Tests 
 { 
-    namespace Events
+    namespace STLObjectPool
     {
 
         #ifdef ENABLE_TEST1      
@@ -428,6 +428,6 @@ namespace Tests
     } 
 
 
-} // namespace Test::Events
+} // namespace Test::STLObjectPool
 
 
