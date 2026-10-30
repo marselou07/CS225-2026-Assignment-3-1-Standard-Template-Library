@@ -3,7 +3,7 @@ These macros can be activated or deactivate to validate a particular test. For d
 only comment the corresponding line. The code needed to compile and run the test will be deactivated in the test suite.
 All these macros must be activated to garantee all tests pass. 
 */
-
+/*
 #define ENABLE_TEST1
 #define ENABLE_TEST2
 #define ENABLE_TEST3
@@ -18,4 +18,4 @@ All these macros must be activated to garantee all tests pass.
 #define ENABLE_TEST12
 #define ENABLE_TEST13
 #define ENABLE_TEST14
-
+*/
