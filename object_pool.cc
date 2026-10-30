@@ -1,10 +1,13 @@
 #include "object_pool.hh"
 bool isTrue(PoolItem* p)
 {
-    return p->Active;
+    return p->active;
 }
-
-void ObjectPool::add(PoolItem item)
+bool isFalse(PoolItem* p)
+{
+    return p->active== false;
+}
+void ObjectPool::add(PoolItem& item)
 {
     this->Object_container.push_back(&item);
 }
@@ -44,4 +47,75 @@ PoolItem* ObjectPool::findByRef(PoolItem PoolName)
         return nullptr;
     }
     return (*it);
+}
+
+void ObjectPool::activate(const std::string name)
+{
+    std::for_each(Object_container.begin(),Object_container.end(),[name]( PoolItem* Pool)
+{
+    if(Pool->name == name)
+    {
+        Pool->active = true;
+    }
+});
+}
+
+void ObjectPool::deactivate(const std::string name)
+{
+    std::for_each(Object_container.begin(),Object_container.end(),[name]( PoolItem* Pool)
+{
+    if(Pool->name == name)
+    {
+        Pool->active = false;
+    }
+});
+}
+
+void ObjectPool::updateAll()
+{
+    std::for_each(Object_container.begin(),Object_container.end(),[]( PoolItem* Pool)
+    {
+        Pool->update();
+    });
+}
+
+void ObjectPool::drawAll()
+{
+    std::for_each(Object_container.begin(),Object_container.end(),[]( PoolItem* Pool)
+    {   
+        Pool->draw();
+    });
+}
+
+void ObjectPool::updateActive()
+{
+    std::for_each(Object_container.begin(),Object_container.end(),[]( PoolItem* Pool)
+    {
+        if(Pool->active == true)
+        Pool->update();
+    });
+}
+
+void ObjectPool::drawActive()
+{
+    std::for_each(Object_container.begin(),Object_container.end(),[]( PoolItem* Pool)
+    {
+        if(Pool->active == true)
+        Pool->draw();
+    });
+}
+
+void ObjectPool::removeByName(std::string name)
+{
+    auto it = std::remove_if(Object_container.begin(),Object_container.end(),[name]( PoolItem* Pool)
+    {
+        return name == Pool->name;
+    });
+    Object_container.erase(it,Object_container.end());
+}
+
+void ObjectPool::removeInactive()
+{
+    auto it = std::remove_if(Object_container.begin(),Object_container.end(),isFalse);
+    Object_container.erase(it,Object_container.end());
 }
