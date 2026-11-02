@@ -11,8 +11,7 @@ class PoolItem : public Entity
         void draw() override; // Provided method, do not change
         std::string name;
         bool active = false;
-        PoolItem(std::string n, bool A): name(n),active(A)
-        {}
+        PoolItem(std::string n, bool A);
         
 
 
