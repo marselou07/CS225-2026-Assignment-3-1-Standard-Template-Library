@@ -21,3 +21,15 @@ class ObjectPool
     void removeByName(std::string name);
     void removeInactive();
 };
+struct PoolFinder
+{
+    std::string name;
+    PoolFinder(std::string n)
+    {
+        name = n;
+    }
+    bool operator()(const PoolItem* obj)
+    {
+        return obj->name == name;
+    }
+};

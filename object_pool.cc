@@ -31,6 +31,26 @@ bool isFalse(PoolItem* p)
     return p->active== false;
 }
 /**
+ * UpdatePool
+ * @param context: Calls update for all objects
+ * @param p: A pointer to the checked item
+ * @return nothing
+ */
+void UpdatePool(PoolItem* p)
+{
+    p->update();
+}
+/**
+ * Drawpool
+ * @param context: Calls draw for all objects
+ * @param p: A pointer to the checked item
+ * @return nothing
+ */
+void Drawpool(PoolItem* p)
+{
+    p->draw();
+}
+/**
  * add
  * @param context: Adds a new item to the
  * container
@@ -72,10 +92,8 @@ int ObjectPool::countActive()
  */
 PoolItem* ObjectPool::findByName(const std::string name)
 {
-    auto it = find_if(this->Object_container.begin(),Object_container.end(), [name](const PoolItem* Pool)
-    {
-        return Pool->name == name;
-    });
+    PoolFinder finder(name);
+    auto it = find_if(this->Object_container.begin(),Object_container.end(), finder);
     if(it == Object_container.end())
     {
         return nullptr;
@@ -93,10 +111,8 @@ PoolItem* ObjectPool::findByName(const std::string name)
  */
 PoolItem* ObjectPool::findByRef(PoolItem PoolName)
 {
-    auto it = find_if(this->Object_container.begin(),Object_container.end(), [PoolName](const PoolItem* Pool)
-    {
-        return Pool->name == PoolName.name;
-    });
+    PoolFinder finder(PoolName.name);
+    auto it = find_if(this->Object_container.begin(),Object_container.end(), finder);
     if(it == Object_container.end())
     {
         return nullptr;
@@ -142,10 +158,7 @@ void ObjectPool::deactivate(const std::string name)
  */
 void ObjectPool::updateAll()
 {
-    std::for_each(Object_container.begin(),Object_container.end(),[]( PoolItem* Pool)
-    {
-        Pool->update();
-    });
+    std::for_each(Object_container.begin(),Object_container.end(),UpdatePool);
 }
 /**
  * drawAll
@@ -154,10 +167,7 @@ void ObjectPool::updateAll()
  */
 void ObjectPool::drawAll()
 {
-    std::for_each(Object_container.begin(),Object_container.end(),[]( PoolItem* Pool)
-    {   
-        Pool->draw();
-    });
+    std::for_each(Object_container.begin(),Object_container.end(),Drawpool);
 }
 /**
  * updateActive
@@ -194,10 +204,8 @@ void ObjectPool::drawActive()
  */
 void ObjectPool::removeByName(std::string name)
 {
-    auto it = std::remove_if(Object_container.begin(),Object_container.end(),[name]( PoolItem* Pool)
-    {
-        return name == Pool->name;
-    });
+    PoolFinder finder(name);
+    auto it = std::remove_if(Object_container.begin(),Object_container.end(),finder);
     Object_container.erase(it,Object_container.end());
 }
 /**
